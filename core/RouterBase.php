@@ -10,6 +10,7 @@ class RouterBase
 
     public function run($routes)
     {
+
         $method = Request::getMethod();
         $url = Request::getUrl();
 
@@ -18,13 +19,18 @@ class RouterBase
         $action = Config::DEFAULT_ACTION;
         $args = [];
 
+
+
         if (isset($routes[$method])) {
+
             foreach ($routes[$method] as $route => $callback) {
+
                 // Identifica os argumentos e substitui por regex
                 $pattern = preg_replace('(\{[a-z0-9]{1,}\})', '([a-z0-9-]{1,})', $route);
 
                 // Faz o match da URL
-                if (preg_match('#^(' . $pattern . ')*$#i', $url, $matches) === 1) {
+                if (preg_match('#^(' . $pattern . ')*$#i', $url, $matches) === 0) {
+
                     array_shift($matches);
                     array_shift($matches);
 
@@ -56,6 +62,7 @@ class RouterBase
         }
 
         $controller = "\src\modules\\$controller";
+
         $definedController = new $controller();
 
         $definedController->$action($args);

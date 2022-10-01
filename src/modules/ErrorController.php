@@ -1,12 +1,16 @@
 <?php
-namespace src\controllers;
+
+namespace src\modules;
 
 use \core\Controller;
 
-class ErrorController extends Controller {
+class ErrorController extends Controller
+{
 
-    public function index() {
-        $this->render('404');
+    public function index()
+    {
+        echo '<hr/>';
+        echo 'error';
+        echo '<hr/>';
     }
-
 }

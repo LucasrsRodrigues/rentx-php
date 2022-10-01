@@ -2,10 +2,15 @@
 
 namespace src\modules\cars\useCases\createCategory;
 
+use src\modules\cars\repositories\CategoriesRepository;
+
 class CreateCategoryUseCase
 {
+  private $categoriesRepository;
+
   public function __construct()
   {
+    $this->categoriesRepository = CategoriesRepository::getInstance();
   }
 
   public static function getInstance()
@@ -21,5 +26,7 @@ class CreateCategoryUseCase
 
   public function execute()
   {
+    // Service 
+    $this->categoriesRepository->create('random', 'batata');
   }
 }

@@ -35,7 +35,6 @@ class Controller
     {
         $data = json_decode(file_get_contents("php://input"));
         $array = json_decode(json_encode($data), true);
-
         return $array;
     }
 }
