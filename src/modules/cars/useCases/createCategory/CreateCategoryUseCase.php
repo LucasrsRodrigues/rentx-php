@@ -2,6 +2,8 @@
 
 namespace src\modules\cars\useCases\createCategory;
 
+use core\AppError;
+use ErrorException;
 use src\modules\cars\repositories\CategoriesRepository;
 
 class CreateCategoryUseCase
@@ -24,9 +26,15 @@ class CreateCategoryUseCase
     return $inst;
   }
 
-  public function execute()
+  public function execute($name, $description)
   {
     // Service 
-    $this->categoriesRepository->create('random', 'batata');
+    $categoryAlreadyExists = $this->categoriesRepository->findByName($name);
+
+    if ($categoryAlreadyExists) {
+      throw new AppError('Category Already Exists!');
+    }
+
+    $this->categoriesRepository->create($name, $description);
   }
 }

@@ -30,11 +30,4 @@ class Router extends RouterBase
     {
         $this->routes['delete'][$endpoint] = $trigger;
     }
-
-    public function loadRouteFile($file)
-    {
-        if (file_exists('src/routes/' . $file . '.routes.php')) {
-            require 'src/routes/' . $file . '.routes.php';
-        }
-    }
 }

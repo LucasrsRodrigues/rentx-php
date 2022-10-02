@@ -25,8 +25,9 @@ class Controller
         return $base;
     }
 
-    public function returnJson($data = [])
+    public function returnJson($data = [], $statusCode = 200)
     {
+        http_response_code($statusCode);
         return json_encode($data);
     }
 

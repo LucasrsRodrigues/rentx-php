@@ -2,8 +2,12 @@
 
 namespace src\modules\cars\repositories;
 
-class CategoriesRepository
+use src\modules\cars\entities\Category;
+use core\Model;
+
+class CategoriesRepository extends Model
 {
+
   public function __construct()
   {
   }
@@ -19,10 +23,28 @@ class CategoriesRepository
     return $inst;
   }
 
-  public function create($description, $name)
+  public function create($name, $description)
   {
-    echo $description;
-    echo '<br />';
-    echo $name;
+
+    $response = Category::insert([
+      'id' => $this->genrerateUUID(),
+      'name' => $name,
+      'description' => $description
+    ])->execute();
+
+    return $response;
+  }
+
+  public function list()
+  {
+    $response = Category::select();
+
+    return $response;
+  }
+
+  public function findByName($name)
+  {
+    $category = Category::select()->where('name', $name)->execute();
+    return $category;
   }
 }

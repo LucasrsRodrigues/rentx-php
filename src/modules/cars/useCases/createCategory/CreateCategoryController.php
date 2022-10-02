@@ -26,14 +26,11 @@ class CreateCategoryController extends Controller
 
     public function handle()
     {
-
-
         $data = json_decode(file_get_contents("php://input"));
         $array = json_decode(json_encode($data), true);
 
-        $teste = $this->createCategoryUseCase->execute();
+        $response = $this->createCategoryUseCase->execute($array['name'], $array['description']);
 
-        echo $teste;
-        // echo $this->returnJson($teste);
+        echo $this->returnJson($response, 201);
     }
 }

@@ -2,15 +2,14 @@
 
 namespace src\modules;
 
+use core\AppError;
 use \core\Controller;
 
 class ErrorController extends Controller
 {
 
-    public function index()
+    public function __construct()
     {
-        echo '<hr/>';
-        echo 'error';
-        echo '<hr/>';
+        new AppError('Rota não encontrada', 404);
     }
 }

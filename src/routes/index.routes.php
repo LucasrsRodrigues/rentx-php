@@ -5,8 +5,9 @@ use core\Router;
 
 $router = new Router();
 
-$router->post('/cars', 'cars@createCategory');
-// $router->post('/cars', 'cars@createCategory');
+require('categories.routes.php');
+require('users.routes.php');
 
-// require('./cars.routes.php');
-// $router->loadRouteFile('cars');
+// $router->post('/cars', 'cars@createCategory');
+// $router->get('/cars', 'cars@listCategory');
+// $router->post('/users', 'accounts@createUser');
