@@ -3,6 +3,7 @@
 namespace src\modules\cars\useCases\listCategory;
 
 use core\Controller;
+use helper\JWT;
 
 class ListCategoryController extends Controller
 {
@@ -10,6 +11,7 @@ class ListCategoryController extends Controller
 
   public function __construct()
   {
+    JWT::ensureAuthenticated();
     $this->listCategoryUseCase = ListCategoryUseCase::getInstance();
   }
 

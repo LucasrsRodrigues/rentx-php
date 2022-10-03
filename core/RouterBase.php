@@ -13,15 +13,10 @@ class RouterBase
 
         $method = Request::getMethod();
         $url = Request::getUrl();
-
         // Define os itens padrão
         $controller = Config::ERROR_CONTROLLER;
         $action = Config::DEFAULT_ACTION;
         $args = [];
-
-
-
-
 
         if (isset($routes[$method])) {
 
@@ -62,6 +57,8 @@ class RouterBase
                 }
             }
         }
+
+
 
         $controller = "\src\modules\\$controller";
 

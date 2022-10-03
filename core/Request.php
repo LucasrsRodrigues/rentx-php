@@ -9,9 +9,6 @@ class Request
 
     public static function getUrl()
     {
-        // $url = filter_input(INPUT_GET, 'request');
-        // $url = str_replace(Config::BASE_DIR, '', $url);
-        // return '/' . $url;
 
         $url = str_replace("", "", $_SERVER["REQUEST_URI"]);
 

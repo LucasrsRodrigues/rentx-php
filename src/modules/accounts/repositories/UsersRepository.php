@@ -41,6 +41,6 @@ class UsersRepository extends Model
   {
     $user = User::select()->where('email', $email)->execute();
 
-    return $user;
+    return $user[0];
   }
 }

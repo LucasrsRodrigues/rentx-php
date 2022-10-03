@@ -3,6 +3,7 @@
 namespace src\modules\accounts\useCases\authenticateUser;
 
 use core\AppError;
+use helper\JWT;
 use src\modules\accounts\repositories\UsersRepository;
 
 class AuthenticateUserUseCase
@@ -27,6 +28,8 @@ class AuthenticateUserUseCase
 
   public function execute($email, $password)
   {
+
+
     // usuario existe
     $user = $this->userRepository->findByEmail($email);
 
@@ -34,14 +37,25 @@ class AuthenticateUserUseCase
       throw new AppError('Email or password incorrect!');
     }
 
-    $passwordMath = md5($password) == $user['passowrd'];
+    $passwordMath = md5($password) == $user['password'];
 
     if (!$passwordMath) {
       throw new AppError('Email or password incorrect!');
     }
 
-    // $token = 
-    // senha correta
-    // gerar token
+    $jwt = new JWT();
+
+    $token = $jwt->create([
+      "user_id" => $user['id']
+    ]);
+
+    unset($user['password']);
+
+    $response = array(
+      "user" => $user,
+      "token" => $token
+    );
+
+    return $response;
   }
 }

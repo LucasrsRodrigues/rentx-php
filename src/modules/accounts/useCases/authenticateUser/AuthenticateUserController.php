@@ -27,5 +27,10 @@ class AuthenticateUserController extends Controller
 
   public function handle()
   {
+    $data = $this->getData();
+
+    $token = $this->authenticateUserUseCase->execute($data['email'], $data['password']);
+
+    echo $this->returnJson($token);
   }
 }

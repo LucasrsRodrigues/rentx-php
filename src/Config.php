@@ -12,6 +12,8 @@ class Config
     const DB_USER = 'root';
     const DB_PASS = '';
 
+    const JWT_TOKEN = '1fea01fd3292089d3b5f54ec32c35087';
+
     const ERROR_CONTROLLER = 'ErrorController';
     const DEFAULT_ACTION = 'index';
 }
