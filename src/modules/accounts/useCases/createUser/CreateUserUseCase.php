@@ -2,6 +2,7 @@
 
 namespace src\modules\accounts\useCases\createUser;
 
+use core\AppError;
 use src\modules\accounts\repositories\UsersRepository;
 
 class CreateUserUseCase
@@ -32,17 +33,19 @@ class CreateUserUseCase
     $driver_license,
     $isAdmin = false
   ) {
+    $userAlreadyExists = $this->userRepository->findByEmail($email);
 
-    echo  $name;
-    echo '<br/>';
-    echo  $username;
-    echo '<br/>';
-    echo  $password;
-    echo '<br/>';
-    echo  $email;
-    echo '<br/>';
-    echo  $driver_license;
-    echo '<br/>';
-    echo  $isAdmin;
+    if ($userAlreadyExists) {
+      throw new AppError('User already Exists!', 500);
+    }
+
+    $this->userRepository->create(
+      $name,
+      $username,
+      md5($password),
+      $email,
+      $driver_license,
+      $isAdmin
+    );
   }
 }

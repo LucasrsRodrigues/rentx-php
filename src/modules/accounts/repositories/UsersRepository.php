@@ -36,4 +36,11 @@ class UsersRepository extends Model
 
     return $response;
   }
+
+  public function findByEmail($email)
+  {
+    $user = User::select()->where('email', $email)->execute();
+
+    return $user;
+  }
 }
