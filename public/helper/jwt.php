@@ -4,9 +4,12 @@ namespace helper;
 
 use core\AppError;
 use src\Config;
+use src\modules\accounts\entities\User;
+use src\modules\accounts\repositories\UsersRepository;
 
 class JWT
 {
+
   public function create($data)
   {
     $header = json_encode(array(
@@ -37,10 +40,17 @@ class JWT
     }
 
     $token = explode(' ', $apache_headers['Authorization'])[1];
+    $data_token = self::validate($token);
 
-    $isValid = self::validate($token);
+    $usersRepository = new UsersRepository();
 
-    return !!$isValid;
+    $exists = $usersRepository->findById($data_token->user_id);
+
+    if (!$exists) {
+      throw new AppError('User does not exists!');
+    }
+
+    return true;
   }
 
   public static function validate($token)

@@ -30,4 +30,9 @@ class Router extends RouterBase
     {
         return $this->routes['delete'][$endpoint] = $trigger;
     }
+
+    public function patch($endpoint, $trigger)
+    {
+        return $this->routes['patch'][$endpoint] = $trigger;
+    }
 }

@@ -43,4 +43,11 @@ class UsersRepository extends Model
 
     return $user[0];
   }
+
+  public function findById($id)
+  {
+    $user = User::select()->where('id', $id)->execute();
+
+    return $user[0];
+  }
 }
