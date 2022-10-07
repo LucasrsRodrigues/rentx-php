@@ -29,15 +29,16 @@ class AuthenticateUserUseCase
   public function execute($email, $password)
   {
 
-
     // usuario existe
     $user = $this->userRepository->findByEmail($email);
+
 
     if (!$user) {
       throw new AppError('Email or password incorrect!');
     }
 
     $passwordMath = md5($password) == $user['password'];
+
 
     if (!$passwordMath) {
       throw new AppError('Email or password incorrect!');

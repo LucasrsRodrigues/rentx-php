@@ -3,7 +3,6 @@
 namespace src\modules\cars\useCases\createCategory;
 
 use core\AppError;
-use ErrorException;
 use src\modules\cars\repositories\CategoriesRepository;
 
 class CreateCategoryUseCase
@@ -32,7 +31,7 @@ class CreateCategoryUseCase
     $categoryAlreadyExists = $this->categoriesRepository->findByName($name);
 
     if ($categoryAlreadyExists) {
-      throw new AppError('Category Already Exists!');
+      throw new AppError('Category Already Exists!', 500);
     }
 
     $this->categoriesRepository->create($name, $description);

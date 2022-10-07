@@ -38,19 +38,17 @@ class UpdateUserAvatarController extends Controller
       throw new AppError('Formato não permitido!');
     }
 
-    $pasta = '/tmp/avatar';
+    $pasta = __DIR__ . '/../../../../../tmp/';
 
     $temporario = $file['tmp_name'];
 
-    echo $temporario;
-    exit;
     $novo_nome = $user_id . ".$extensao";
 
     if (move_uploaded_file($temporario, $pasta . $novo_nome)) {
       echo $this->returnJson(['upload feito com sucesso!'], 201);
     }
-    // $response = $this->updateAvatarUseCase->execute($user_id, $avatar_file);
+    $response = $this->updateAvatarUseCase->execute($user_id, $avatar_file);
 
-    // echo $this->returnJson($response, 201);
+    echo $this->returnJson($response, 201);
   }
 }

@@ -26,11 +26,15 @@ class CategoriesRepository extends Model
   public function create($name, $description)
   {
 
-    $response = Category::insert([
+    Category::insert([
       'id' => $this->genrerateUUID(),
       'name' => $name,
       'description' => $description
     ])->execute();
+
+    $response = [
+      "message" => "Categoria cadastrada com sucesso!"
+    ];
 
     return $response;
   }

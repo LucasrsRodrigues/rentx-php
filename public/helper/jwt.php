@@ -31,7 +31,7 @@ class JWT
   }
 
 
-  public static function ensureAuthenticated()
+  public static function ensureAuthenticated($isAdmin = false)
   {
     $apache_headers = apache_request_headers();
 
@@ -48,6 +48,10 @@ class JWT
 
     if (!$exists) {
       throw new AppError('User does not exists!');
+    }
+
+    if ($isAdmin && $exists['isAdmin'] !== "1") {
+      throw new AppError("User isn't admin!");
     }
 
     return true;

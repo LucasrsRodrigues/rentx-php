@@ -36,7 +36,6 @@ class CreateUserController extends Controller
       $password,
       $email,
       $driver_license,
-      isset($isAdmin) && $isAdmin
     );
 
     echo $this->returnJson($response, 201);

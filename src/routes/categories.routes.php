@@ -1,8 +1,8 @@
 <?php
 
-$router->post('/cars', 'cars@createCategory');
+$router->post('/categories', 'cars@createCategory');
 
 $router->get(
-  '/cars',
+  '/categories',
   'cars@listCategory'
 );

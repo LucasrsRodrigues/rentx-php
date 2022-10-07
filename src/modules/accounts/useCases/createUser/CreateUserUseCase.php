@@ -31,7 +31,6 @@ class CreateUserUseCase
     $password,
     $email,
     $driver_license,
-    $isAdmin = false
   ) {
     $userAlreadyExists = $this->userRepository->findByEmail($email);
 
@@ -39,13 +38,14 @@ class CreateUserUseCase
       throw new AppError('User already Exists!', 500);
     }
 
-    $this->userRepository->create(
+    $response = $this->userRepository->create(
       $name,
       $username,
       md5($password),
       $email,
       $driver_license,
-      $isAdmin
     );
+
+    return $response;
   }
 }

@@ -81,6 +81,12 @@ class Model
         return self::$_h->insert($fields);
     }
 
+    public static function lastId()
+    {
+        self::_checkH();
+        return self::$_h->lastInsertId();
+    }
+
     public static function update($fields = [])
     {
         self::_checkH();
@@ -106,7 +112,7 @@ class Model
 
         $last_letter = strtolower($singular[strlen($singular) - 1]);
         // echo $last_letter;
-
+        // Car
         switch ($last_letter) {
             case 'y':
                 return substr($singular, 0, -1) . 'ies';

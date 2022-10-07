@@ -22,7 +22,7 @@ class UsersRepository extends Model
     return $inst;
   }
 
-  public function create($name, $username, $password, $email, $driver_license, $isAdmin = false)
+  public function create($name, $username, $password, $email, $driver_license)
   {
     $response = User::insert([
       'id' => $this->genrerateUUID(),
@@ -31,16 +31,14 @@ class UsersRepository extends Model
       'password' => $password,
       'email' => $email,
       'driver_license' => $driver_license,
-      'isAdmin' => $isAdmin
     ])->execute();
 
-    return $response;
+    return 'Criado com sucesso!';
   }
 
   public function findByEmail($email)
   {
     $user = User::select()->where('email', $email)->execute();
-
     return $user[0];
   }
 
